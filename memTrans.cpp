@@ -2,14 +2,15 @@
 //Devan Tatum, Neil Turnley
 
 #include <iostream>
+#include <fstream>
 
 using std::string;
 using std::cout;
 using std::cin;
 //for file input-output
-using std:ifstream;
+using std::ifstream;
 
-int main(int argc, _TCHAR* arg[]){
+int main(int argc, char* arg[]){
 
 	bool inputOk = false;
 	string ext = ".txt";
@@ -34,7 +35,7 @@ int main(int argc, _TCHAR* arg[]){
 		cout << fOutput << std::endl;
 	}
 	//close the damn reader
-	fRead.close()
+	fRead.close();
 
 	std::cout << "Derp Derp Derp";
 	return 0;
