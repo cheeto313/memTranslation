@@ -5,4 +5,5 @@
 
 int main(){
   std::cout << "Derp Derp Derp";
+  return 0;
 }
