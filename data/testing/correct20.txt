@@ -1,0 +1,25 @@
+Virtual address: 63987 Physical address: 243 Value: 124
+Virtual address: 32256 Physical address: 256 Value: 0
+Virtual address: 41413 Physical address: 709 Value: 0
+Virtual address: 48870 Physical address: 998 Value: 47
+Virtual address: 40282 Physical address: 1114 Value: 39
+Virtual address: 14498 Physical address: 1442 Value: 14
+Virtual address: 62738 Physical address: 1554 Value: 61
+Virtual address: 64859 Physical address: 1883 Value: 86
+Virtual address: 25437 Physical address: 2141 Value: 0
+Virtual address: 9606 Physical address: 2438 Value: 9
+Virtual address: 14533 Physical address: 1477 Value: 0
+Virtual address: 25499 Physical address: 2203 Value: -26
+Virtual address: 25920 Physical address: 2624 Value: 0
+Virtual address: 1981 Physical address: 3005 Value: 0
+Virtual address: 48202 Physical address: 3146 Value: 47
+Virtual address: 15518 Physical address: 3486 Value: 15
+Virtual address: 34908 Physical address: 3676 Value: 0
+Virtual address: 35365 Physical address: 3877 Value: 0
+Virtual address: 30861 Physical address: 4237 Value: 0
+Virtual address: 30258 Physical address: 4402 Value: 29
+Number of Translated Addresses = 20
+Page Faults = 18
+Page Fault Rate = 0.9
+TLB Hits = 2
+TLB Hit Rate = 0.1
