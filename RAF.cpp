@@ -47,7 +47,8 @@ int main(int argc, char **argv) {
 
 		infile.close();
 	}
-
+	
+//virtua address to get the physical address
 
 }
 
