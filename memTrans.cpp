@@ -14,32 +14,31 @@ using std::istringstream;
 using std::cerr;
 
 #define FRAME_NUM 256
-#define FRAME_SIZE 256
 #define TLB_SIZE 16
 #define MEM_SIZE 65536
 #define P_MASK 0xff00
 #define O_MASK 0xff
 #define P_SHIFT 8
 
+const int FRAME_SIZE = 256;
+
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
 	return (vaddr & P_MASK) >> P_SHIFT;
 }
-
+//...or masking
 unsigned int getPageOff(unsigned int vaddr){
 	return (vaddr & O_MASK);
 }
 
 int main(int argc, char* argv[]){
-
 	size_t pos = 0;
 	bool inputOk = false;
 	int count = 5;
 	string input;
 	string fOutput;
 
-	//input validation, make sure that it cannot sontinue without a file
-	//you spin me right round round right round...
+	//get the input yo
 	if(argc > 1){
 		input = argv[1];
 	} else {
@@ -54,7 +53,21 @@ int main(int argc, char* argv[]){
 		istringstream r(fOutput);
 		unsigned int fOut;
 		r >> fOut;
-		cout << fOut << std::endl;
+		if(/* get page from tlb */){
+
+		}
+		else if(/* get the page from the page table */) {
+			if (/* page fault */){
+				/*
+				read from backing store
+				return to page table
+				put it into a frame index
+				tlb pulls from page table
+				*/
+			}
+		}
+		//diag
+		//cout << fOut << std::endl;
 	}
 	//close the damn reader
 	fRead.close();
