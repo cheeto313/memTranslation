@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "frame.h"
 
 //std stuff, because "using namspace std" is just lazy
 using std::string;
@@ -22,6 +23,7 @@ using std::cerr;
 
 const int FRAME_SIZE = 256;
 
+
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
 	return (vaddr & P_MASK) >> P_SHIFT;
@@ -29,6 +31,24 @@ unsigned int getPageNum(unsigned int vaddr){
 //...or masking
 unsigned int getPageOff(unsigned int vaddr){
 	return (vaddr & O_MASK);
+}
+
+char getPhysicalAddr(Frame x){
+	if(/* get page from tlb */){
+
+	}
+	else if(/* get the page from the page table */) {
+		if (/* page fault */){
+			/*
+			read from backing store
+			return to page table
+			put it into a frame index
+			tlb pulls from page table
+			*/
+		}
+	}
+	//diag
+	//cout << fOut << std::endl;
 }
 
 int main(int argc, char* argv[]){
@@ -53,21 +73,7 @@ int main(int argc, char* argv[]){
 		istringstream r(fOutput);
 		unsigned int fOut;
 		r >> fOut;
-		if(/* get page from tlb */){
-
-		}
-		else if(/* get the page from the page table */) {
-			if (/* page fault */){
-				/*
-				read from backing store
-				return to page table
-				put it into a frame index
-				tlb pulls from page table
-				*/
-			}
-		}
-		//diag
-		//cout << fOut << std::endl;
+		//call getPhysical address per vaddr read
 	}
 	//close the damn reader
 	fRead.close();

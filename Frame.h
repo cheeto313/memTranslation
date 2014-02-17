@@ -3,8 +3,9 @@
 class Frame{
 	public:
 		Frame (int, char);
-		getPageNumber(unsigned int);
-	private:
+		char getPageNumber(int);
+		int getVal(char);
+		int counter;
 };
 
 #endif

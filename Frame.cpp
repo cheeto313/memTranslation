@@ -4,9 +4,10 @@ Frame Object class
 */
 #include "Frame.h";
 
+int counter = 0;
 //constructor
 Frame::Frame(int size, char val){
-
+	
 }
 
 //destructor
