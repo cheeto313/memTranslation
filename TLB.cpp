@@ -22,11 +22,16 @@ typedef std::unordered_map<>
 
 //blank constructor
 TLB::TLB (){
+	int counter = 0;
 	unordered_map <unsigned int, unsigned int> tlb;
 }
 
 unsigned int getFrameNumber(unsigned x){
 	return tlb[x];
+}
+
+int getHits(){
+	return counter;
 }
 
 void addEntry(unsigned int pnum, unsigned int fnum){
@@ -35,6 +40,8 @@ void addEntry(unsigned int pnum, unsigned int fnum){
 
 bool check(unsigned int pnum){
 	if(tlb[pnum] != NULL){
+		//increment counter and return true! It is here!
+		counter++;
 		return true;
 	} else {
 		return false;

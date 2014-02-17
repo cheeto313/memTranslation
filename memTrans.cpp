@@ -14,6 +14,7 @@ This work is solely and completely our own original work.
 #include <fstream>
 #include <sstream>
 #include "Frame.h"
+#include "TLB.h"
 
 //std stuff, because "using namspace std" is just lazy
 using std::string;

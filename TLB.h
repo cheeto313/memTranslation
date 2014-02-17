@@ -10,10 +10,13 @@ This work is solely and completely our own original work.
 
 #ifndef TLB_H
 #define TLB_H
+#include <unordered_map>
+
 class TLB{
 	public:
 		TLB ();
 		unsigned int getFrameNumber(unsigned int);
+		int getHits();
 		bool check(unsigned int);
 		void addEntry(unsigned int);
 	private:

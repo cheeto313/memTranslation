@@ -10,7 +10,6 @@ This work is solely and completely our own original work.
 
 #include "Frame.h";
 
-int counter = 0;
 //constructor, yo
 Frame::Frame(int initSize, char initVal){
 	val = initVal;
