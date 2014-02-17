@@ -1,5 +1,4 @@
 //Memory Translation for CS470 @ CWU
-following header:
 
 /*
 
@@ -32,8 +31,6 @@ using std::cerr;
 #define P_SHIFT 8
 
 const int FRAME_SIZE = 256;
-int pageFault = 0;
-int tlbHit = 0;
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
@@ -84,7 +81,7 @@ int main(int argc, char* argv[]){
 		istringstream r(fOutput);
 		unsigned int fOut;
 		r >> fOut;
-		//call getPhysical address per vaddr read
+		//call getPhysical address per laddr read
 	}
 	//close the damn reader
 	fRead.close();

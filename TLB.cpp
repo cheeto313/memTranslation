@@ -13,20 +13,30 @@ This work is solely and completely our own original work.
 
 {Neil Turnley}
 
- */
+*/
 
 #include <unordered_map>
 #include "TLB.h"
 
 typedef std::unordered_map<>
 
-
-TLB::TLB (unsigned int pn, unsigned int pf){
-	
+//blank constructor
+TLB::TLB (){
+	unordered_map <unsigned int, unsigned int> tlb;
 }
 
-unsigned int getFrame(unsigned x){
-	
+unsigned int getFrameNumber(unsigned x){
+	return tlb[x];
 }
 
+void addEntry(unsigned int pnum, unsigned int fnum){
+	tlb[pnum] = fnum;
+}
 
+bool check(unsigned int pnum){
+	if(tlb[pnum] != NULL){
+		return true;
+	} else {
+		return false;
+	}
+}
