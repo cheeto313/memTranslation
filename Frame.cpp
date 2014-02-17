@@ -5,13 +5,13 @@ Frame Object class
 #include "Frame.h";
 
 int counter = 0;
-//constructor
+//constructor, yo
 Frame::Frame(int initSize, char initVal){
 	val = initVal;
 	size = initSize;
 }
 
-//destructor
+//destructor, yo
 Frame::~Frame(){
 	delete[];
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "frame.h"
+#include "Frame.h"
 
 //std stuff, because "using namspace std" is just lazy
 using std::string;
@@ -22,7 +22,6 @@ using std::cerr;
 #define P_SHIFT 8
 
 const int FRAME_SIZE = 256;
-
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
