@@ -1,5 +1,15 @@
 //Memory Translation for CS470 @ CWU
-//Devan Tatum, Neil Turnley
+following header:
+
+/*
+
+This work is solely and completely our own original work. 
+
+{Devan Tatum}
+
+{Neil Turnley}
+
+ */
 
 #include <iostream>
 #include <fstream>
@@ -22,6 +32,8 @@ using std::cerr;
 #define P_SHIFT 8
 
 const int FRAME_SIZE = 256;
+int pageFault = 0;
+int tlbHit = 0;
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){

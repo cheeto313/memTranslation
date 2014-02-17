@@ -1,7 +1,13 @@
 /*
-Devan Tatum
-Frame Object class
+
+This work is solely and completely our own original work. 
+
+{Devan Tatum}
+
+{Neil Turnley}
+
 */
+
 #include "Frame.h";
 
 int counter = 0;
