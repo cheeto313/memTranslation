@@ -3,9 +3,12 @@
 class Frame{
 	public:
 		Frame (int, char);
+		~Frame();
 		char getPageNumber(int);
 		int getVal(char);
-		int counter;
+	private:
+		char val;
+		int size;
 };
 
 #endif

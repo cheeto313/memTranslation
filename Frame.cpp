@@ -6,17 +6,20 @@ Frame Object class
 
 int counter = 0;
 //constructor
-Frame::Frame(int size, char val){
-	
+Frame::Frame(int initSize, char initVal){
+	val = initVal;
+	size = initSize;
 }
 
 //destructor
-Frame::~Frame(){}
-
-unsigned int Frame::getPageNumber(){
-	return //pn
+Frame::~Frame(){
+	delete[];
 }
 
-unsigned int Frame::getVal(){
-	return //val
+int Frame::getPageNumber(){
+	return size;
+}
+
+char Frame::getVal(){
+	return val;
 }
