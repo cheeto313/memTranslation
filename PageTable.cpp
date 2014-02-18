@@ -30,9 +30,7 @@ class PageTable{
 //constructor and destructor, no trogdor
 PageTable::PageTable(){}
 
-PageTable::~PageTable(){
-	//delete[];
-}
+PageTable::~PageTable(){}
 
 bool PageTable::checkPageTable(int x){
 	for(int j=0; j<=255; j++){
@@ -56,8 +54,12 @@ int PageTable::getPageNumber(int x){
 	}
 }
 
-void PageTable::addEntry(){
-	//add shit here
+void PageTable::addEntry(Frame n){
+	for(int j=0; j<=255; j++){
+		if((page_table[j].getPageNumber()) == 0){
+			page_table[j] = n;
+		}
+	}
 }
 
 void PageTable::incCoutner(){

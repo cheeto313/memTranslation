@@ -13,28 +13,30 @@ This work is solely and completely our own original work.
 //blank constructor, yo
 Frame::Frame(){
 	//initialize to 0 so it can checked
-	this->val = 0;
+	this->val[255] = {0};
 	this->size = 0;
 }
 
 //destructor, yo
-Frame::~Frame(){
-	//delete[];
-}
+Frame::~Frame(){}
 
 //getters and setters, yay!
 int Frame::getPageNumber(){
 	return this->size;
 }
 
-char Frame::getVal(){
-	return this->val;
+char Frame::getVal(unsigned int x){
+	return this->val[x];
 }
 
-void Frame::setVal(char x){
-	val = x;
+void Frame::setVal(char[] x){
+	//copy the array to the frame char array
+	for (int j=0; j<=255; j++){
+		this->val[j] = x[j];
+	}
+	
 }
 
 void Frame::setSize(int x){
-	size = x;
+	this->size = x;
 }

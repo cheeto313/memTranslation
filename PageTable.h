@@ -19,7 +19,7 @@ class PageTable{
 		bool checkPageTable(int x);
 		int getCounter();
 		int getPageNumber(int);
-		void addEntry();
+		void addEntry(Frame);
 		void incCoutner();
 	private:
 		//the index is the page number
