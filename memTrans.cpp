@@ -60,7 +60,7 @@ char getPhysicalAddr(unsigned int x){
 	}
 	else if(page_table.checkPageTable(x)) {
 		//if in the page table, return the physical address
-		return (page_table.getVal(x));
+		return (page_table.getPageNumber(x));
 	} else {
 		//up the page fault counter
 		

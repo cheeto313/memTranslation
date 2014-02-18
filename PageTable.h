@@ -18,7 +18,7 @@ class PageTable{
 		~PageTable();
 		bool checkPageTable(int x);
 		int getCounter();
-		char getVal(int);
+		int getPageNumber(int);
 		void addEntry();
 		void incCoutner();
 	private:

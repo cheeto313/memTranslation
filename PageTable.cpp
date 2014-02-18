@@ -35,10 +35,12 @@ PageTable::~PageTable(){
 }
 
 bool PageTable::checkPageTable(int x){
-	if((page_table[x].getVal()) != '0'){
-		return true;
-	} else {
-		return false;
+	for(int j=0; j<=255; j++){
+		if((page_table[x].getPageNumber()) == x){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 
@@ -46,8 +48,12 @@ int PageTable::getCounter(){
 	return counter;
 }
 
-char PageTable::getVal(int x){
-	return (page_table[x].getVal());
+int PageTable::getPageNumber(int x){
+	for (int j=0; j<=255; j++){
+		if((page_table[j].getVal()) == x){
+			return j;
+		}
+	}
 }
 
 void PageTable::addEntry(){

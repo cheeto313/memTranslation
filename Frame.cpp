@@ -13,8 +13,8 @@ This work is solely and completely our own original work.
 //blank constructor, yo
 Frame::Frame(){
 	//initialize to 0 so it can checked
-	val = 0;
-	size = 0;
+	this->val = 0;
+	this->size = 0;
 }
 
 //destructor, yo
