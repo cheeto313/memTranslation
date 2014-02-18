@@ -32,7 +32,7 @@ int PageTable::getCounter(){
 	return counter;
 }
 
-int PageTable::getPageNumber(int x){
+int PageTable::getFrameNumber(int x){
 	for (int j=0; j<256; j++){
 		if((page_table[j].getPageNumber()) == x){
 			return j;
@@ -54,6 +54,6 @@ void PageTable::addEntry(Frame n){
 	}
 }
 
-void PageTable::incCoutner(){
+void PageTable::incCounter(){
 	counter++;
 }

@@ -18,10 +18,10 @@ class PageTable{
 		~PageTable();
 		bool checkPageTable(int x);
 		int getCounter();
-		int getPageNumber(int);
+		int getFrameNumber(int);
 		signed int getValue(int, unsigned int);
 		void addEntry(Frame);
-		void incCoutner();
+		void incCounter();
 	private:
 		//the index is the page number
 		Frame page_table[255];

@@ -64,7 +64,7 @@ signed int *getFrameDat(unsigned int x){
 		infile.read(value,256);
 
 		infile.close();
-		//this is a shameless hack
+		//this is a shameless hack, implicit casting ftw
 		for(int j=0;j<256;j++){
 			v[j] = value[j];
 		}
@@ -83,16 +83,19 @@ signed int getValue(unsigned int x){
 		//need more things here, like returning the actual physical address
 		return (ptable.getValue(working_tlb.getFrameNumber(x), offset));
 	}
-	else if(ptable.checkPageTable(pageNum)) {
+	else if(ptable.checkPageTable(pageNum)){
 		//if in the page table, return the physical address
-		return (ptable.getValue(ptable.getPageNumber(pageNum), offset));
+		working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
+		return (ptable.getValue(ptable.getFrameNumber(pageNum), offset));
 	} else {
 		//up the page fault counter
 		Frame f;
 		f.setVal(getFrameDat(pageNum));
 		f.setPageNumber(pageNum);
 		ptable.addEntry(f);
-		return (ptable.getValue(ptable.getPageNumber(pageNum), offset));
+		ptable.incCounter();
+		working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
+		return (ptable.getValue(ptable.getFrameNumber(pageNum), offset));
 	}
 }
 
@@ -101,7 +104,7 @@ int getPhysicalAddr(unsigned int x){
 	unsigned int pageNum = getPageNum(x);
 	unsigned int offset = getPageOff(x);
 
-	return (ptable.getPageNumber(pageNum) * 256) + offset;
+	return (ptable.getFrameNumber(pageNum) * 256) + offset;
 }
 
 int main(int argc, char* argv[]){

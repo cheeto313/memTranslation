@@ -19,9 +19,9 @@ class TLB{
 		unsigned int getFrameNumber(unsigned int);
 		int getHits();
 		bool check(unsigned int);
-		void addEntry(unsigned int, unsigned int);
+		void addEntry(int, int);
 	private:
-		std::unordered_map <unsigned int, unsigned int> tlb;
+		std::unordered_map <int, int> tlb;
 		int counter;
 };
 
