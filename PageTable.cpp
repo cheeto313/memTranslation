@@ -20,7 +20,7 @@ PageTable::PageTable(){
 PageTable::~PageTable(){}
 
 bool PageTable::checkPageTable(int x){
-	for(int j=0; j<=255; j++){
+	for(int j=0; j<256; j++){
 		if((page_table[x].getPageNumber()) == x){
 			return true;
 		} else {
@@ -34,7 +34,7 @@ int PageTable::getCounter(){
 }
 
 int PageTable::getPageNumber(int x){
-	for (int j=0; j<=255; j++){
+	for (int j=0; j<256; j++){
 		if((page_table[j].getPageNumber()) == x){
 			return j;
 		} else {
@@ -48,7 +48,7 @@ char PageTable::getValue(int x, unsigned int y){
 }
 
 void PageTable::addEntry(Frame n){
-	for(int j=0; j<=255; j++){
+	for(int j=0; j<256; j++){
 		if((page_table[j].getPageNumber()) == 0){
 			page_table[j] = n;
 		}

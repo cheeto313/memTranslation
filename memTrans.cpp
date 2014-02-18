@@ -33,7 +33,7 @@ using std::cerr;
 #define P_MASK 0xff00
 #define O_MASK 0xff
 #define P_SHIFT 8
-#define FILENAME "BAKING_STORE"
+#define FILENAME "BACKING_STORE"
 
 //0-255, because arrays
 const int FRAME_SIZE = 255;
@@ -60,14 +60,12 @@ char *getFrameDat(unsigned int x){
 	std::ifstream infile;
 	infile.open(FILENAME, std::ifstream::binary);
 	if(infile.is_open()){
-
 		char value[255];
 		// go to the page where info is stored
 		infile.seekg((x*256));
 		infile.read(value,256);
 		infile.close();
-
-		return value;
+		return value;	
 	} else {
 		return NULL;
 	}
@@ -102,7 +100,7 @@ int getPhysicalAddr(unsigned int x){
 	unsigned int pageNum = getPageNum(x);
 	unsigned int offset = getPageOff(x);
 
-	return (ptable.getPageNumber(pagenum) * 256) + offset;
+	return (ptable.getPageNumber(pageNum) * 256) + offset;
 }
 
 int main(int argc, char* argv[]){
@@ -131,8 +129,9 @@ int main(int argc, char* argv[]){
 
 		int value = getValue(fOut);
 
-		cout << "Virtual Address is:  " << fOut;
-		cout << "Physical Address is: " << getPhysicalAddr(fOut);
+		cout << "Virtual Address is: " << fOut << " ";
+		//<< std::endl;
+	//	cout << "Physical Address is: " << getPhysicalAddr(fOut);
 		cout << "Value is: " << value << std::endl;
 
 	}
