@@ -20,15 +20,16 @@ This work is solely and completely our own original work.
 using namespace std;
 //constructor and destructor, no trogdor
 PageTable::PageTable(){
-	this->page_table[255];
+	this->page_table[256];
 	this->counter = 0;
 }
 
 PageTable::~PageTable(){}
 
 bool PageTable::checkPageTable(int x){
-	for(int j=0; j<256; j++){
-		if((page_table[x].getPageNumber()) == x){
+
+	for(int j=1; j<257; j++){
+		if((page_table[j].getPageNumber()) == x){
 			return true;
 		} 
 	}
@@ -41,7 +42,7 @@ int PageTable::getCounter(){
 
 int PageTable::getFrameNumber(int x){
 	//cout << "pass x: " << x;
-	for (int j=0; j<256; j++){
+	for (int j=1; j<257; j++){
 		if((page_table[j].getPageNumber()) == x){
 			return j;
 		}
@@ -54,11 +55,14 @@ signed int PageTable::getValue(int x, unsigned int y){
 }
 
 void PageTable::addEntry(Frame n){
-	for(int j=0; j<256; j++){
+	//cout << n.getPageNumber() << std::endl;
+	for(int j=1; j<257; j++){
+	  
 		if((page_table[j].getPageNumber()) == 0){
+		  
 			page_table[j] = n;
 			//exit the loop
-			j = 256;
+			j = 257;
 		}
 	}
 }

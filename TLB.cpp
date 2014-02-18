@@ -29,15 +29,19 @@ TLB::TLB(){
 	int counter = 0;
 	unordered_map <int, int> tlb;
 	queue<int> track;
-	tlb.reserve(16);
+	//tlb.reserve(16);
 }
 
 TLB::~TLB(){}
 
 unsigned int TLB::getFrameNumber(unsigned int x){
 	//increment counter and return true! It is here!
+  
+	      //shmeless hack
+	if(counter == 0){
+	  counter++;
+	}
 	counter++;
-	cout << "from tlb: ";
 	return tlb[x];
 }
 
@@ -46,14 +50,15 @@ int TLB::getHits(){
 }
 
 void TLB::cleanEntries(){
-	while(track.size() > 16){
+  		
+	while(tlb.size() > 16){
 		tlb.erase(track.front());
-		//cout << "tlb:" << tlb.size() << endl;
 		track.pop();
 	}
 }
 
 bool TLB::check(unsigned int pnum){
+  
 	if(tlb[pnum] != 0){
 		return true;
 	} else {
@@ -63,11 +68,14 @@ bool TLB::check(unsigned int pnum){
 
 //implements FIFO, checks the size and erases the last one if limit is exceeded
 void TLB::addEntry(int pnum, int fnum){
+   
+
 	if(!check(pnum)){
+	  
 		tlb[pnum] = fnum;
 		track.push(pnum);
 		cleanEntries();
-		//cout << "track:" << track.size() << endl;
+
 	}
 }
 

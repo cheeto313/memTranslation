@@ -19,7 +19,7 @@ class Frame{
 		void setVal(signed int[]);
 		void setPageNumber(int);
 	private:
-		signed int val[255];
+		signed int val[256];
 		int pagenum;
 };
 
