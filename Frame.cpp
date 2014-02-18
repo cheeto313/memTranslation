@@ -31,7 +31,7 @@ char Frame::getVal(unsigned int x){
 
 void Frame::setVal(char[] x){
 	//copy the array to the frame char array
-	for (int j=0; j<=255; j++){
+	for (int j=0; j<=(this->size); j++){
 		this->val[j] = x[j];
 	}
 	

@@ -23,8 +23,8 @@ int main(int argc, char **argv) {
 	infile.open(FILENAME, std::ifstream::binary);
 	if(infile.is_open()){
 
-		char value[256];
-		// read from byte 100
+		char value[255];
+		// go to the page where info is stored
 		infile.seekg((num*256));
 		infile.read(value,256);
 

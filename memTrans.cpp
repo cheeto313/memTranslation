@@ -13,6 +13,7 @@ This work is solely and completely our own original work.
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 //our classes
 #include "Frame.h"
 #include "TLB.h"
@@ -45,7 +46,7 @@ TLB working_tlb;
 PageTable page_table;
 
 //all the cool kids are shifting
-unsigned int getPageNum(unsigned int vaddr){
+unsigned int getPageNum(unsigned int vaddr){	
 	return (vaddr & P_MASK) >> P_SHIFT;
 }
 //...or masking
@@ -53,17 +54,25 @@ unsigned int getPageOff(unsigned int vaddr){
 	return (vaddr & O_MASK);
 }
 
-char getPhysicalAddr(unsigned int x){
-	if(working_tlb.check(x)){
+int getValue(unsigned int x){
+
+	unsigned int pageNum = getPageNum(x);
+	unsigned int offset = getPageOff(x);
+
+	if(working_tlb.check(pageNum)){
 		//need more things here, like returning the actual physical address
-		return (working_tlb.getFrameNumber(x));
+		return (page_table.getVal(working_tlb.getFrameNumber(x)));
 	}
-	else if(page_table.checkPageTable(x)) {
+	else if(page_table.checkPageTable(pageNum)) {
 		//if in the page table, return the physical address
-		return (page_table.getPageNumber(x));
+		return (page_table.getVal(page_table.getPageNumber(pageNum)));
 	} else {
 		//up the page fault counter
-		
+		Frame f;
+		f.setVal(getFrameDat(pageNum));
+		f.setSize(FRAME_SIZE);
+		page_table.addEntry(f);
+
 		/*
 		read from backing store
 		return to page table
@@ -73,6 +82,25 @@ char getPhysicalAddr(unsigned int x){
 	}
 	//diag
 	//cout << fOut << std::endl;
+}
+
+//gets the array of values to put into the page table
+char[] getFrameDat(unsigned int x){
+	std::ifstream infile;
+	infile.open(FILENAME, std::ifstream::binary);
+	if(infile.is_open()){
+
+		char value[255];
+		// go to the page where info is stored
+		infile.seekg((num*256));
+		infile.read(value,256);
+		infile.close();
+
+		return value[];
+}
+
+int getPhysicalAddr(unsigned int pagenum, unsigned int offset){
+	return (page_table.getPageNumber(pagenum) * 256) + offset
 }
 
 int main(int argc, char* argv[]){

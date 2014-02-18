@@ -41,7 +41,7 @@ void TLB::addEntry(unsigned int pnum, unsigned int fnum){
 }
 
 bool TLB::check(unsigned int pnum){
-	if(tlb[pnum] != NULL){
+	if(tlb[pnum] != 0){
 		//increment counter and return true! It is here!
 		counter++;
 		return true;
