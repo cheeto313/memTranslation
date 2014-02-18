@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <fstream>
 
-#define FILENAME "RAFFILE"
+#define FILENAME "BACKING_STORE"
 
 int main(int argc, char **argv) {
 	if(argc < 2){
@@ -18,20 +18,6 @@ int main(int argc, char **argv) {
 	}
 
 	int num = atoi(argv[1]);
-
-	std::ofstream outFile;
-	outFile.open(FILENAME, std::ofstream::binary);
-	if(outFile.is_open()){
-
-		// seek to byte 100
-		outFile.seekp(100);
-
-		// write number to file
-		outFile.write(reinterpret_cast<const char *>(&num), sizeof(num));
-
-		outFile.close();
-	}
-
 
 	std::ifstream infile;
 	infile.open(FILENAME, std::ifstream::binary);
