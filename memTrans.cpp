@@ -81,7 +81,7 @@ signed int getValue(unsigned int x){
 
 	if(working_tlb.check(pageNum)){
 		//need more things here, like returning the actual physical address
-		return (ptable.getValue(working_tlb.getFrameNumber(x), offset));
+		return (ptable.getValue(working_tlb.getFrameNumber(pageNum), offset));
 	}
 	else if(ptable.checkPageTable(pageNum)){
 		//if in the page table, return the physical address
@@ -132,7 +132,7 @@ int main(int argc, char* argv[]){
 		r >> fOut;
 		//call getPhysical address per laddr read
 
-		int value = getValue(fOut);
+		signed int value = getValue(fOut);
 
 		cout << "Virtual Address is: " << fOut << " ";
 	    cout << "Physical Address is: " << getPhysicalAddr(fOut) << " ";
