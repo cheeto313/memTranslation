@@ -57,6 +57,7 @@ void PageTable::addEntry(Frame n){
 	for(int j=0; j<256; j++){
 		if((page_table[j].getPageNumber()) == 0){
 			page_table[j] = n;
+			//exit the loop
 			j = 256;
 		}
 	}
