@@ -79,6 +79,9 @@ signed int getValue(unsigned int x){
 	unsigned int pageNum = getPageNum(x);
 	unsigned int offset = getPageOff(x);
 
+	cout << "page num is: " << pageNum << std::endl;
+	cout << "offset is: " << offset << std::endl;
+ 	//cout << pageNum;
 	if(working_tlb.check(pageNum)){
 		//need more things here, like returning the actual physical address
 		return (ptable.getValue(working_tlb.getFrameNumber(pageNum), offset));
@@ -87,7 +90,8 @@ signed int getValue(unsigned int x){
 		//if in the page table, return the physical address
 		working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
 		return (ptable.getValue(ptable.getFrameNumber(pageNum), offset));
-	} else {
+	}
+	else if(!(ptable.checkPageTable(pageNum)) && !(working_tlb.check(pageNum))){
 		//up the page fault counter
 		Frame f;
 		f.setVal(getFrameDat(pageNum));

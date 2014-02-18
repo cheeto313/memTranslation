@@ -10,7 +10,14 @@ This work is solely and completely our own original work.
 
 #include "PageTable.h"
 #include "Frame.h"
+//diag
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <cstdlib>
 
+using namespace std;
 //constructor and destructor, no trogdor
 PageTable::PageTable(){
 	this->page_table[255];
@@ -33,6 +40,7 @@ int PageTable::getCounter(){
 }
 
 int PageTable::getFrameNumber(int x){
+	//cout << "pass x: " << x;
 	for (int j=0; j<256; j++){
 		if((page_table[j].getPageNumber()) == x){
 			return j;
