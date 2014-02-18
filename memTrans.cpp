@@ -88,10 +88,10 @@ signed int getValue(unsigned int x){
 	}
 	else if(ptable.checkPageTable(pageNum)){
 		//if in the page table, return the physical address
-		working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
+		//working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
 		return (ptable.getValue(ptable.getFrameNumber(pageNum), offset));
 	}
-	else if(!(ptable.checkPageTable(pageNum)) && !(working_tlb.check(pageNum))){
+	else if((!(ptable.checkPageTable(pageNum)) && !(working_tlb.check(pageNum)))){
 		//up the page fault counter
 		Frame f;
 		f.setVal(getFrameDat(pageNum));
@@ -133,13 +133,15 @@ int main(int argc, char* argv[]){
 		istringstream r(fOutput);
 		unsigned int fOut;
 		r >> fOut;
-		//call getPhysical address per laddr read
 
-		signed int value = getValue(fOut);
+		if(fOut != 0){
+			signed int value = getValue(fOut);
 
-		cout << "Virtual Address is: " << fOut << " ";
-	    cout << "Physical Address is: " << getPhysicalAddr(fOut) << " ";
-		cout << "Value is: " << value << std::endl;
+			cout << "Virtual Address is: " << fOut << " ";
+		    cout << "Physical Address is: " << getPhysicalAddr(fOut) << " ";
+			cout << "Value is: " << value << std::endl;
+		}
+		fOut = 0;
 	}
 
 	//close the damn reader
