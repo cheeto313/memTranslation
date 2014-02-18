@@ -11,6 +11,7 @@ This work is solely and completely our own original work.
 */
 
 #include <unordered_map>
+#include <queue>
 #include "TLB.h"
 //diag
 #include <iostream>
@@ -20,13 +21,14 @@ This work is solely and completely our own original work.
 #include <cstdlib>
 
 using namespace std;
-//typedef std::unordered_map<>
+
 using std::unordered_map;
 
 //blank constructor
 TLB::TLB(){
 	int counter = 0;
 	unordered_map <int, int> tlb;
+	queue<int> track;
 	tlb.reserve(16);
 }
 
@@ -35,6 +37,7 @@ TLB::~TLB(){}
 unsigned int TLB::getFrameNumber(unsigned int x){
 	//increment counter and return true! It is here!
 	counter++;
+	cout << "from tlb: ";
 	return tlb[x];
 }
 
@@ -42,15 +45,11 @@ int TLB::getHits(){
 	return counter;
 }
 
-//implements FIFO, checks the size and erases the last one if limit is exceeded
-void TLB::addEntry(int pnum, int fnum){
-	if(tlb.size() < 16){
-		tlb[pnum] = fnum;
-		cout << "add" << tlb.size() << endl;
-	} else {
-		this->tlb.erase(tlb.begin());
-		cout << "erase" << tlb.size() << endl;
-		tlb[pnum] = fnum;
+void TLB::cleanEntries(){
+	while(track.size() >= 16){
+		tlb.erase(track.front());
+		//cout << "tlb:" << tlb.size() << endl;
+		track.pop();
 	}
 }
 
@@ -61,3 +60,18 @@ bool TLB::check(unsigned int pnum){
 		return false;
 	}
 }
+
+//implements FIFO, checks the size and erases the last one if limit is exceeded
+void TLB::addEntry(int pnum, int fnum){
+	if(!check(pnum)){
+		cleanEntries();
+		tlb[pnum] = fnum;
+		track.push(pnum);
+		//cout << "track:" << track.size() << endl;
+	}
+}
+
+/*
+
+*/
+

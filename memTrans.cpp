@@ -95,6 +95,7 @@ signed int getValue(unsigned int x){
 		ptable.addEntry(f);
 		ptable.incCounter();
 		working_tlb.addEntry(pageNum, ptable.getFrameNumber(pageNum));
+		cout << pageNum << std::endl;
 		return (ptable.getValue(ptable.getFrameNumber(pageNum), offset));
 	}
 }

@@ -11,6 +11,7 @@ This work is solely and completely our own original work.
 #ifndef TLB_H
 #define TLB_H
 #include <unordered_map>
+#include <queue>
 
 class TLB{
 	public:
@@ -20,8 +21,10 @@ class TLB{
 		int getHits();
 		bool check(unsigned int);
 		void addEntry(int, int);
+		void cleanEntries();
 	private:
 		std::unordered_map <int, int> tlb;
+		std::queue<int> track;
 		int counter;
 };
 
