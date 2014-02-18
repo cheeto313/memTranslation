@@ -54,6 +54,10 @@ int PageTable::getPageNumber(int x){
 	}
 }
 
+char getValue(int x, unsigned int y){
+	return (page_table[x].getVal(y));
+}
+
 void PageTable::addEntry(Frame n){
 	for(int j=0; j<=255; j++){
 		if((page_table[j].getPageNumber()) == 0){
