@@ -25,11 +25,11 @@ int Frame::getPageNumber(){
 	return this->pagenum;
 }
 
-char Frame::getVal(unsigned int x){
+signed int Frame::getVal(unsigned int x){
 	return this->val[x];
 }
 
-void Frame::setVal(char x[]){
+void Frame::setVal(signed int x[]){
 	//copy the array to the frame char array
 	for (int j=0; j<256; j++){
 		this->val[j] = x[j];

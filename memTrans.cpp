@@ -46,11 +46,6 @@ PageTable ptable;
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){	
 	return (vaddr & P_MASK) >> P_SHIFT;
-	//std::bitset<16> y(vaddr);
-	//string temp = y.substr(0,7);
-
-	//unsigned int p = std::bitset<8>(temp).to_ulong;
-	//return p;
 }
 //...or masking
 unsigned int getPageOff(unsigned int vaddr){
@@ -58,22 +53,28 @@ unsigned int getPageOff(unsigned int vaddr){
 }
 
 //gets the array of values to put into the page table
-char *getFrameDat(unsigned int x){
+signed int *getFrameDat(unsigned int x){
 	std::ifstream infile;
 	infile.open(FILENAME, std::ifstream::binary);
 	if(infile.is_open()){
 		char value[255];
+		signed int v[255];
 		// go to the page where info is stored
 		infile.seekg((x*256));
 		infile.read(value,256);
+
 		infile.close();
-		return value;	
+		//this is a shameless hack
+		for(int j=0;j<256;j++){
+			v[j] = value[j];
+		}
+		return v;	
 	} else {
 		return NULL;
 	}
 }
 
-int getValue(unsigned int x){
+signed int getValue(unsigned int x){
 
 	unsigned int pageNum = getPageNum(x);
 	unsigned int offset = getPageOff(x);
@@ -93,8 +94,6 @@ int getValue(unsigned int x){
 		ptable.addEntry(f);
 		return (ptable.getValue(ptable.getPageNumber(pageNum), offset));
 	}
-	//diag
-	//cout << fOut << std::endl;
 }
 
 int getPhysicalAddr(unsigned int x){
@@ -134,8 +133,8 @@ int main(int argc, char* argv[]){
 		cout << "Virtual Address is: " << fOut << " ";
 	    cout << "Physical Address is: " << getPhysicalAddr(fOut) << " ";
 		cout << "Value is: " << value << std::endl;
-
 	}
+
 	//close the damn reader
 	fRead.close();
 	//output needed statistics

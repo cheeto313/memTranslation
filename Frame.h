@@ -15,11 +15,11 @@ class Frame{
 		Frame();
 		~Frame();
 		int getPageNumber();
-		char getVal(unsigned int);
-		void setVal(char[]);
+		signed int getVal(unsigned int);
+		void setVal(signed int[]);
 		void setPageNumber(int);
 	private:
-		char val[255] = {0};
+		signed int val[255] = {0};
 		int pagenum;
 };
 
