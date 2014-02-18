@@ -33,6 +33,7 @@ using std::cerr;
 #define P_MASK 0xff00
 #define O_MASK 0xff
 #define P_SHIFT 8
+#define FILENAME "BAKING_STORE"
 
 //0-255, because arrays
 const int FRAME_SIZE = 255;
@@ -43,7 +44,7 @@ const int FRAME_SIZE = 255;
 
 //initialize a blank TLB here
 TLB working_tlb;
-PageTable page_table;
+PageTable ptable;
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){	
@@ -54,6 +55,24 @@ unsigned int getPageOff(unsigned int vaddr){
 	return (vaddr & O_MASK);
 }
 
+//gets the array of values to put into the page table
+char *getFrameDat(unsigned int x){
+	std::ifstream infile;
+	infile.open(FILENAME, std::ifstream::binary);
+	if(infile.is_open()){
+
+		char value[255];
+		// go to the page where info is stored
+		infile.seekg((x*256));
+		infile.read(value,256);
+		infile.close();
+
+		return value;
+	} else {
+		return NULL;
+	}
+}
+
 int getValue(unsigned int x){
 
 	unsigned int pageNum = getPageNum(x);
@@ -61,40 +80,25 @@ int getValue(unsigned int x){
 
 	if(working_tlb.check(pageNum)){
 		//need more things here, like returning the actual physical address
-		return (page_table.getValue(working_tlb.getFrameNumber(x)), offset);
+		return (ptable.getValue(working_tlb.getFrameNumber(x), offset));
 	}
-	else if(page_table.checkPageTable(pageNum)) {
+	else if(ptable.checkPageTable(pageNum)) {
 		//if in the page table, return the physical address
-		return (page_table.getValue(page_table.getPageNumber(pageNum)), offset);
+		return (ptable.getValue(ptable.getPageNumber(pageNum), offset));
 	} else {
 		//up the page fault counter
 		Frame f;
 		f.setVal(getFrameDat(pageNum));
-		f.setSize(FRAME_SIZE);
-		page_table.addEntry(f);
-		return (page_table.getValue(page_table.getPageNumber(pageNum)), offset);
+		f.setPageNumber(pageNum);
+		ptable.addEntry(f);
+		return (ptable.getValue(ptable.getPageNumber(pageNum), offset));
 	}
 	//diag
 	//cout << fOut << std::endl;
 }
 
-//gets the array of values to put into the page table
-char[] getFrameDat(unsigned int x){
-	std::ifstream infile;
-	infile.open(FILENAME, std::ifstream::binary);
-	if(infile.is_open()){
-
-		char value[255];
-		// go to the page where info is stored
-		infile.seekg((num*256));
-		infile.read(value,256);
-		infile.close();
-
-		return value[];
-}
-
 int getPhysicalAddr(unsigned int pagenum, unsigned int offset){
-	return (page_table.getPageNumber(pagenum) * 256) + offset
+	return (ptable.getPageNumber(pagenum) * 256) + offset;
 }
 
 int main(int argc, char* argv[]){
@@ -125,7 +129,7 @@ int main(int argc, char* argv[]){
 	fRead.close();
 	//output needed statistics
 	cout << "TLB Hit Count is: " << working_tlb.getHits() << std::endl;
-	cout << "Page Fault Count is: " << page_table.getCounter() << std::endl;
+	cout << "Page Fault Count is: " << ptable.getCounter() << std::endl;
 
 	return 0;
 }

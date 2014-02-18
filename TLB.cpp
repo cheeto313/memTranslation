@@ -24,9 +24,7 @@ TLB::TLB(){
 	unordered_map <unsigned int, unsigned int> tlb;
 }
 
-TLB::~TLB(){
-	//delete[];
-}
+TLB::~TLB(){}
 
 unsigned int TLB::getFrameNumber(unsigned int x){
 	return tlb[x];
