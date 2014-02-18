@@ -97,14 +97,18 @@ int getValue(unsigned int x){
 	//cout << fOut << std::endl;
 }
 
-int getPhysicalAddr(unsigned int pagenum, unsigned int offset){
+int getPhysicalAddr(unsigned int x){
+
+	unsigned int pageNum = getPageNum(x);
+	unsigned int offset = getPageOff(x);
+
 	return (ptable.getPageNumber(pagenum) * 256) + offset;
 }
 
 int main(int argc, char* argv[]){
 	size_t pos = 0;
-	bool inputOk = false;
 	int count = 5;
+
 	string input;
 	string fOutput;
 
@@ -124,6 +128,13 @@ int main(int argc, char* argv[]){
 		unsigned int fOut;
 		r >> fOut;
 		//call getPhysical address per laddr read
+
+		int value = getValue(fOut);
+
+		cout << "Virtual Address is:  " << fOut;
+		cout << "Physical Address is: " << getPhysicalAddr(fOut);
+		cout << "Value is: " << value << std::endl;
+
 	}
 	//close the damn reader
 	fRead.close();
