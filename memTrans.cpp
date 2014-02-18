@@ -61,24 +61,18 @@ int getValue(unsigned int x){
 
 	if(working_tlb.check(pageNum)){
 		//need more things here, like returning the actual physical address
-		return (page_table.getVal(working_tlb.getFrameNumber(x)));
+		return (page_table.getValue(working_tlb.getFrameNumber(x)), offset);
 	}
 	else if(page_table.checkPageTable(pageNum)) {
 		//if in the page table, return the physical address
-		return (page_table.getVal(page_table.getPageNumber(pageNum)));
+		return (page_table.getValue(page_table.getPageNumber(pageNum)), offset);
 	} else {
 		//up the page fault counter
 		Frame f;
 		f.setVal(getFrameDat(pageNum));
 		f.setSize(FRAME_SIZE);
 		page_table.addEntry(f);
-
-		/*
-		read from backing store
-		return to page table
-		put it into a frame index
-		tlb pulls from page table
-		*/
+		return (page_table.getValue(page_table.getPageNumber(pageNum)), offset);
 	}
 	//diag
 	//cout << fOut << std::endl;
