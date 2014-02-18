@@ -23,13 +23,17 @@ int main(int argc, char **argv) {
 	infile.open(FILENAME, std::ifstream::binary);
 	if(infile.is_open()){
 
-		char value[sizeof(num)];
+		char value[256];
 		// read from byte 100
-		infile.seekg(100);
-		infile.read(value,sizeof(num));
+		infile.seekg((num*256));
+		infile.read(value,256);
 
-		// output value
-		printf("%02d\n", ((const unsigned char*)value)[0]&0xff);
+		for (int n=0; n<256; n++) {
+   		 // output value
+		printf("Offset %d = ", n);
+		printf("%d\n", ((signed int)value[n]));
+
+		}
 
 		infile.close();
 	}
