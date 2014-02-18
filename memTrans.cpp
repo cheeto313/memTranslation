@@ -13,6 +13,7 @@ This work is solely and completely our own original work.
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include <cstdlib>
 //our classes
 #include "Frame.h"
@@ -38,10 +39,6 @@ using std::cerr;
 //0-255, because arrays
 const int FRAME_SIZE = 255;
 
-//uncomment if no class for page table
-//the index is the page number
-//Frame page_table[FRAME_SIZE];
-
 //initialize a blank TLB here
 TLB working_tlb;
 PageTable ptable;
@@ -49,6 +46,11 @@ PageTable ptable;
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){	
 	return (vaddr & P_MASK) >> P_SHIFT;
+	//std::bitset<16> y(vaddr);
+	//string temp = y.substr(0,7);
+
+	//unsigned int p = std::bitset<8>(temp).to_ulong;
+	//return p;
 }
 //...or masking
 unsigned int getPageOff(unsigned int vaddr){
@@ -130,8 +132,7 @@ int main(int argc, char* argv[]){
 		int value = getValue(fOut);
 
 		cout << "Virtual Address is: " << fOut << " ";
-		//<< std::endl;
-	//	cout << "Physical Address is: " << getPhysicalAddr(fOut);
+	    cout << "Physical Address is: " << getPhysicalAddr(fOut) << " ";
 		cout << "Value is: " << value << std::endl;
 
 	}
