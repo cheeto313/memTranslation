@@ -14,8 +14,10 @@ class Frame{
 	public:
 		Frame();
 		~Frame();
-		char getPageNumber(int);
-		int getVal(char);
+		int getPageNumber();
+		char getVal();
+		void setVal(char);
+		void setSize(int);
 	private:
 		char val;
 		int size;

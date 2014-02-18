@@ -13,8 +13,10 @@ This work is solely and completely our own original work.
 #include <iostream>
 #include <fstream>
 #include <sstream>
+//our classes
 #include "Frame.h"
 #include "TLB.h"
+#include "PageTable.h"
 
 //std stuff, because "using namspace std" is just lazy
 using std::string;
@@ -33,10 +35,14 @@ using std::cerr;
 
 //0-255, because arrays
 const int FRAME_SIZE = 255;
+
+//uncomment if no class for page table
 //the index is the page number
-Frame page_table[FRAME_SIZE];
+//Frame page_table[FRAME_SIZE];
+
 //initialize a blank TLB here
-TLB workingTLB;
+TLB working_tlb;
+PageTable page_table;
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
@@ -48,19 +54,22 @@ unsigned int getPageOff(unsigned int vaddr){
 }
 
 char getPhysicalAddr(unsigned int x){
-	if(workingTLB.check(x)){
+	if(working_tlb.check(x)){
 		//need more things here, like returning the actual physical address
-		return (workingTLB.getFrameNumber(x));
+		return (working_tlb.getFrameNumber(x));
 	}
-	else if(/* get the page from the page table */) {
-		if (/* page fault */){
-			/*
-			read from backing store
-			return to page table
-			put it into a frame index
-			tlb pulls from page table
-			*/
-		}
+	else if(page_table.checkPageTable(x)) {
+		//if in the page table, return the physical address
+		return (page_table.getVal(x));
+	} else {
+		//up the page fault counter
+		
+		/*
+		read from backing store
+		return to page table
+		put it into a frame index
+		tlb pulls from page table
+		*/
 	}
 	//diag
 	//cout << fOut << std::endl;
@@ -93,6 +102,8 @@ int main(int argc, char* argv[]){
 	//close the damn reader
 	fRead.close();
 	//output needed statistics
-	cout << workingTLB.getHits() << std::endl;
+	cout << "TLB Hit Count is: " << working_tlb.getHits() << std::endl;
+	cout << "Page Fault Count is: " << page_table.getCounter() << std::endl;
+
 	return 0;
 }

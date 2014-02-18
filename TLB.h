@@ -15,12 +15,14 @@ This work is solely and completely our own original work.
 class TLB{
 	public:
 		TLB ();
+		~TLB();
 		unsigned int getFrameNumber(unsigned int);
 		int getHits();
 		bool check(unsigned int);
-		void addEntry(unsigned int);
+		void addEntry(unsigned int, unsigned int);
 	private:
 		std::unordered_map <unsigned int, unsigned int> tlb;
+		int counter;
 };
 
 #endif

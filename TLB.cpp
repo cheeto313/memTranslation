@@ -15,27 +15,32 @@ This work is solely and completely our own original work.
 #include <unordered_map>
 #include "TLB.h"
 
-typedef std::unordered_map<>
+//typedef std::unordered_map<>
+using std::unordered_map;
 
 //blank constructor
-TLB::TLB (){
+TLB::TLB(){
 	int counter = 0;
 	unordered_map <unsigned int, unsigned int> tlb;
 }
 
-unsigned int getFrameNumber(unsigned x){
+TLB::~TLB(){
+	//delete[];
+}
+
+unsigned int TLB::getFrameNumber(unsigned int x){
 	return tlb[x];
 }
 
-int getHits(){
+int TLB::getHits(){
 	return counter;
 }
 
-void addEntry(unsigned int pnum, unsigned int fnum){
+void TLB::addEntry(unsigned int pnum, unsigned int fnum){
 	tlb[pnum] = fnum;
 }
 
-bool check(unsigned int pnum){
+bool TLB::check(unsigned int pnum){
 	if(tlb[pnum] != NULL){
 		//increment counter and return true! It is here!
 		counter++;

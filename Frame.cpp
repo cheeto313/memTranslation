@@ -8,29 +8,33 @@ This work is solely and completely our own original work.
 
 */
 
-#include "Frame.h";
+#include "Frame.h"
 
 //blank constructor, yo
-Frame::Frame(){}
+Frame::Frame(){
+	//initialize to 0 so it can checked
+	val = 0;
+	size = 0;
+}
 
 //destructor, yo
 Frame::~Frame(){
-	delete[];
+	//delete[];
 }
 
 //getters and setters, yay!
 int Frame::getPageNumber(){
-	return size;
+	return this->size;
 }
 
 char Frame::getVal(){
-	return val;
+	return this->val;
 }
 
-void setVal(){
-	val = initVal;
+void Frame::setVal(char x){
+	val = x;
 }
 
-void setSize(){
-	size = initSize;
+void Frame::setSize(int x){
+	size = x;
 }
