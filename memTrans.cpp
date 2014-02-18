@@ -31,7 +31,12 @@ using std::cerr;
 #define O_MASK 0xff
 #define P_SHIFT 8
 
-const int FRAME_SIZE = 256;
+//0-255, because arrays
+const int FRAME_SIZE = 255;
+//the index is the page number
+Frame page_table[FRAME_SIZE];
+//initialize a blank TLB here
+TLB workingTLB;
 
 //all the cool kids are shifting
 unsigned int getPageNum(unsigned int vaddr){
@@ -42,9 +47,10 @@ unsigned int getPageOff(unsigned int vaddr){
 	return (vaddr & O_MASK);
 }
 
-char getPhysicalAddr(Frame x){
-	if(/* get page from tlb */){
-
+char getPhysicalAddr(unsigned int x){
+	if(workingTLB.check(x)){
+		//need more things here, like returning the actual physical address
+		return (workingTLB.getFrameNumber(x));
 	}
 	else if(/* get the page from the page table */) {
 		if (/* page fault */){
@@ -86,5 +92,7 @@ int main(int argc, char* argv[]){
 	}
 	//close the damn reader
 	fRead.close();
+	//output needed statistics
+	cout << workingTLB.getHits() << std::endl;
 	return 0;
 }

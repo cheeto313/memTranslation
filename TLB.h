@@ -20,7 +20,7 @@ class TLB{
 		bool check(unsigned int);
 		void addEntry(unsigned int);
 	private:
-		unordered_map <unsigned int, unsigned int> tlb;
+		std::unordered_map <unsigned int, unsigned int> tlb;
 };
 
 #endif

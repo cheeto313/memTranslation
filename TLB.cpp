@@ -3,9 +3,6 @@ Devan Tatum
 TLB Class, but you already knew that...so why are you here?
 Meant to simulate the TLB and physical memory, NEED to add the functionality of RAF.cpp
 for this to work 
-*/
-
-/*
 
 This work is solely and completely our own original work. 
 

@@ -12,7 +12,7 @@ This work is solely and completely our own original work.
 #define FRAME_H
 class Frame{
 	public:
-		Frame (int, char);
+		Frame();
 		~Frame();
 		char getPageNumber(int);
 		int getVal(char);
