@@ -46,7 +46,7 @@ int TLB::getHits(){
 }
 
 void TLB::cleanEntries(){
-	while(track.size() >= 16){
+	while(track.size() > 16){
 		tlb.erase(track.front());
 		//cout << "tlb:" << tlb.size() << endl;
 		track.pop();
@@ -64,9 +64,9 @@ bool TLB::check(unsigned int pnum){
 //implements FIFO, checks the size and erases the last one if limit is exceeded
 void TLB::addEntry(int pnum, int fnum){
 	if(!check(pnum)){
-		cleanEntries();
 		tlb[pnum] = fnum;
 		track.push(pnum);
+		cleanEntries();
 		//cout << "track:" << track.size() << endl;
 	}
 }
