@@ -25,7 +25,6 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::ifstream;
-using std::ofstream;
 using std::istringstream;
 using std::cerr;
 
@@ -114,32 +113,24 @@ int getPhysicalAddr(unsigned int x){
 int main(int argc, char* argv[]){
 	size_t pos = 0;
 	int count = 0;
-	string outputFileName;
 
 	string input;
-		
 	string fOutput;
 
 	//get the input yo
-	if(argc > 2){
+	if(argc > 1){
 		input = argv[1];
-		outputFileName = argv[2];
 	} else {
-		cerr << "Failed, usage is memTrans <InputFile> <OutputFile> \n";
+		cerr << "Failed, usage is memTrans <InputFile> \n";
 		exit(EXIT_FAILURE);
 	}
 	
 	ifstream fRead(input);
-	ofstream oWrite(outputFileName);
-
-
 	while(!fRead.eof()){
-	
+
 		getline(fRead,fOutput);
-		//I have no clue...
-		cout << ""; 
 		istringstream r(fOutput);
-		
+
 		unsigned int fOut;
 		r >> fOut;
 
@@ -147,9 +138,9 @@ int main(int argc, char* argv[]){
 		    count++;
 			signed int value = getValue(fOut);
 
-			oWrite << "Virtual address: " << fOut << " ";
-			oWrite << "Physical address: " << getPhysicalAddr(fOut) << " ";
-			oWrite << "Value: " << value << "\n";
+			cout << "Virtual address: " << fOut << " ";
+			cout << "Physical address: " << getPhysicalAddr(fOut) << " ";
+			cout << "Value: " << value << std::endl;
 		}
 		fOut = 0;
 	}
@@ -157,15 +148,13 @@ int main(int argc, char* argv[]){
 	//close the damn reader
 	fRead.close();
 	//output needed statistics
-	oWrite << "Number of Translated Addresses = " << count << "\n";
-	oWrite << "Page faults = " << ptable.getCounter() << "\n";
-	oWrite << "Page Fault Rate = " << ((double)ptable.getCounter()/(double)count) << "\n";
-	oWrite << "TLB hits = " << working_tlb.getHits() << "\n";
-	oWrite << "TLB Hit Rate = " << ((double)working_tlb.getHits()/(double)count) << "\n";
-	//close the damn writer
-	oWrite.close();
+	cout << "Number of Translated Addresses = " << count << std::endl;
+	cout << "Page faults = " << ptable.getCounter() << std::endl;
+	cout << "Page Fault Rate = " << ((double)ptable.getCounter()/(double)count) << std::endl;
+	cout << "TLB hits = " << working_tlb.getHits() << std::endl;
+	cout << "TLB Hit Rate = = " << ((double)working_tlb.getHits()/(double)count) << std::endl;
 	
-	cout << "All Done <(^_^)^" << std::endl;
+	//cout << "All Done <(^_^)^" << std::endl;
 	return 0;
   }
 

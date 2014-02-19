@@ -1,6 +1,6 @@
 CXX = g++
-PROGRAM = addressTranslator
-OBJS = Frame.o PageTableEntry.o PhysicalMemory.o VirtualMemory.o
+PROGRAM = memTrans
+OBJS = TlB.cpp Frame.cpp PageTable.cpp
 all: ${PROGRAM}
 
 clean:
